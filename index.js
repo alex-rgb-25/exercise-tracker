@@ -3,28 +3,21 @@ var app = express();
 var mongoose = require("mongoose");
 var bodyParser = require('body-parser');
 var session = require('express-session')
-var flash = require('connect-flash');
 
 app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 app.use(express.static(__dirname + "/public"));
+
+
+const uri = "mongodb+srv://alex:1234@cluster0-ojxlg.mongodb.net/<dbname>?retryWrites=true&w=majority"
+mongoose.connect(uri, {  useNewUrlParser: true,  useUnifiedTopology: true})
+.then(() => {  console.log("mongoDB connected...")})
+.catch(err => console.log(err))
+
 
 //body parser
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//flash messages
-app.use(require("express-session")({
-    secret: "Secret secret ding dong pong?",
-    resave:false,
-    saveUninitialized: false
-}));
-app.use(flash());
-app.use(function(req,res, next){
-    res.locals.currentUser = req.user;
-    res.locals.error = req.flash("error");
-    res.locals.success = req.flash("success");
-    next();
-});
 app.set("view engine", "ejs");
 
 //Get the default connection
@@ -57,7 +50,7 @@ var usersSchema=new Schema({
 var User = mongoose.model('User', usersSchema);
 
 app.get("/", function(req, res){
-    res.render("landing");
+    res.render("landing",{usid:req.params.usid});
 })
 
 app.post("/api/exercise/new-user", function(req, res){
@@ -120,16 +113,11 @@ app.get("/api/exercise/log/:userID/:from?/:to?/:limit?", function(req, res){
                 let fromDate = new Date(req.params.from);
                 let toDate = new Date(req.params.to);
                 let limit = Number(req.params.limit);
-
-
                     Exercise.find({_id: {$in: results}}, function(err, foundEx){
                         if(err){ handleError(err)}
                         else{
                         console.log(foundEx)
-                        //var final= foundEx.filter((ex) => ex.date >= fromDate && ex.date <= toDate)
-
                        var final= foundEx.filter(function(ex){
-                           
                            return ex.date< toDate && ex.date>=fromDate
                        })
                        res.send({"exercise":final});
@@ -143,6 +131,19 @@ app.get("/api/exercise/log/:userID/:from?/:to?/:limit?", function(req, res){
         console.log("is null")
     }
    
+})
+
+app.post("/getid", function(req, res){
+    User.findOne({username:req.body.usid}, function(err, found){
+        if(err) {handleError(err)} else{
+            console.log(found)
+            if(found==null){
+                res.json({"error":"username not in database"});
+            }else{
+                res.json({"username": found.username, "id": found._id})
+            }
+        }
+    })
 })
 
 app.listen(process.env.PORT || 3000, function(req, res){

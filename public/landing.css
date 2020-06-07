@@ -1,15 +1,9 @@
-* {
-    box-sizing: border-box;
-  }
+
       
   body {
     margin: 0;
     font-family: Arial;
     font-size: 17px;
     background-color: #9BE564;
+    padding-left:20px;
   }
-
-
-.viewport-header{
-  width: 40%;
-}
