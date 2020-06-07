@@ -147,7 +147,7 @@ app.get("/testing", function(req, res){
 
 app.post("/api/exercise/log",passport.authenticate("local",
 {
-    successRedirect: "/api/exercise/log" + req.user,
+    successRedirect: "/api/exercise/log",
     failureRedirect:"/"
 }), function(req, res){
     
