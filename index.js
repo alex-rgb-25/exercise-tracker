@@ -73,12 +73,10 @@ app.post("/api/exercise/new-user", function(req, res){
 
 app.get("/api/exercise/users",function(req, res){
 
-    User.find(function(req,found){
-        
-    })
+    User.find({})
     .select("_id username")
     .exec((err, users) => {
-        res.json(found)})
+        res.json(users)})
 })
 
 app.post("/api/exercise/add", function(req, res){
