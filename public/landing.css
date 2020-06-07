@@ -8,31 +8,8 @@
     font-size: 17px;
     background-color: #9BE564;
   }
-      
-    #myVideo {
-  object-fit: cover;
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-    }
-    .viewport-header {
-  position: relative;
-  height: 70vh;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  }
-  .taken {
-  position: relative;
-  background-color: white;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 30px;
-  color:rgb(49, 6, 6)
-  }
+
+
+.viewport-header{
+  width: 40%;
+}

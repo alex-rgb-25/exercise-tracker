@@ -1,22 +1,31 @@
 <%- include('../partials/main'); -%>
   
-<video autoplay muted loop id="myVideo">
-  <source src="/vid.mp4" type="video/mp4">
-  Your browser does not support HTML5 video.
-</video>
-
       <header class="viewport-header">
-        <form action="/api/exercise/log" method="POST">
+        <form action="/api/exercise/new-user" method="POST">
             <div class="form-group">
-              <input placeholder = "username" name="username" type="text" class="form-control" >
-                </div>
+              <input name="username" placeholder = "username" type="text" class="form-control" aria-describedby="emailHelp">
+               </div>
             <div class="form-group">
-              <input type="password" name="password" placeholder="password" class="form-control" id="exampleInputPassword1">
+              <input name="password" type="password" placeholder="password" class="form-control" id="exampleInputPassword1">
             </div>
-            <button type="submit" class="btn btn-primary">login</button>
-            <h4 style = "color:white">New here? Get movin... <a href="/signup">sign up</a></h4>
+            <button type="submit" class="btn btn-primary">Register</button>
+            
           </form>
       </header>
-     <div class = "taken">
-         <%=message %>
-     </div>
+
+
+      <form action="/api/exercise/add" method="POST">
+        <div class="form-group">
+          <input name="userID" required placeholder = "user id" type="text" class="form-control" >
+           </div>
+        <div class="form-group">
+         <input name="description" required placeholder = "add description" type="text" class="form-control" >
+          </div>
+          <div class="form-group">
+           <input name="duration"  placeholder = "add duration" type="text" class="form-control" >
+            </div>
+          <div class="form-group">
+           <input name="date" placeholder = "yyyy-mm-dd" type="date" class="form-control">
+            </div>
+     <button type="submit" class="btn btn-primary">Add Exercise</button>
+   </form>
