@@ -63,7 +63,7 @@ app.post("/api/exercise/new-user", function(req, res){
 
     User.create({username: req.body.username}, function(err, newUser){
         if(err){ console.log(err)}else{
-            res.json({"_id": newUser._id, "username": newUser.username})
+            res.json({_id: newUser._id, "username": newUser.username})
         }
     })
 }
