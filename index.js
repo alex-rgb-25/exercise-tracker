@@ -76,7 +76,7 @@ app.get("/api/exercise/users",function(req, res){
     User.find(function(req,found){
         
     })
-    select("_id username")
+    .select("_id username")
     .exec((err, users) => {
         res.json(found)})
 })
