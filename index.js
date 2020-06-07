@@ -61,7 +61,7 @@ app.post("/api/exercise/new-user", function(req, res){
             res.json({"error":"username taken"});
         } else{
 
-    User.create({username: req.body.username, password: req.body.password}, function(err, newUser){
+    User.create({username: req.body.username}, function(err, newUser){
         if(err){ console.log(err)}else{
             res.json({"_id": newUser._id, "username": newUser.username})
         }
