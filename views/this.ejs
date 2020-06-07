@@ -1,0 +1,12 @@
+<h2>
+    Registered users:
+</h2>
+
+<% user.forEach(function(us){%>
+<h3><%=us.username%></h3>
+
+    <% us.exercise.forEach(function(com){ %>
+        <h5><%= com.description %></h5>
+    <%})%>
+
+<% }) %>
