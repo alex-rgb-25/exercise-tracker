@@ -55,6 +55,8 @@ app.get("/", function(req, res){
 
 app.post("/api/exercise/new-user", function(req, res){
 
+    let { username } = req.body;
+
     User.findOne({username:req.body.username},function(err, found){
         if(err) return handleError(err);
         if(found!=null){
@@ -63,7 +65,8 @@ app.post("/api/exercise/new-user", function(req, res){
 
     User.create({username: req.body.username}, function(err, newUser){
         if(err){ console.log(err)}else{
-            res.json({username: newUser.username,_id: newUser._id })
+            const { _id, username } = newUser
+            res.json({username, _id})
         }
     })
 }
