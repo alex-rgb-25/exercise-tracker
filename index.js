@@ -132,7 +132,22 @@ app.get("/api/exercise/log/:userID/:from?/:to?/:limit?", function(req, res){
                 }
             })
         } else{
-        console.log("is null")
+            if(req.params.userID!=null){
+        
+                User.findOne({_id: req.params.userID}, function(err, found){
+                    if(err){ handleError(err)}
+                    else{
+                        let results = found.exercise;
+                            Exercise.find({_id: {$in: results}}, function(err, foundEx){
+                                if(err){ handleError(err)}
+                                else{
+                               res.send({"exercise":foundEx});
+                                }
+                            })
+                        
+                        }
+                    })
+                }
     }
    
 })
