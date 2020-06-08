@@ -38,7 +38,6 @@ var Exercise = mongoose.model("Exercise", exerciseSchema);
 
 var usersSchema=new Schema({
     username: String,
-    password: String,
     exercise: [
         {
             type: mongoose.Schema.Types.ObjectId,
