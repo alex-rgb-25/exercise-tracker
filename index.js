@@ -8,11 +8,12 @@ app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 app.use(express.static(__dirname + "/public"));
 
 
-const uri = "mongodb+srv://alex:1234@cluster0-ojxlg.mongodb.net/<dbname>?retryWrites=true&w=majority"
-mongoose.connect(uri, {  useNewUrlParser: true,  useUnifiedTopology: true})
+//const uri = "mongodb+srv://alex:1234@cluster0-ojxlg.mongodb.net/<dbname>?retryWrites=true&w=majority"
+
+mongoose.connect(process.env.DATABASEURL, {  useNewUrlParser: true,  useUnifiedTopology: true})
 .then(() => {  console.log("mongoDB connected...")})
 .catch(err => console.log(err))
-
+process.env.databaseURL
 
 //body parser
 app.use(bodyParser.json()); 
